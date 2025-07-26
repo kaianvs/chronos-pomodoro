@@ -1,10 +1,14 @@
 import styles from './Heading.module.css'
 
-export function Heading(){
-    console.log(styles.heading)
+type HeadingProps = {
+    children: string;
+}
+
+export function Heading({children}: HeadingProps){
+
 
     const {heading} = styles
 
 
-    return <h1 className= {heading}>Olá mundo</h1>
+    return <h1 className= {heading}>{children}</h1>
 } 
