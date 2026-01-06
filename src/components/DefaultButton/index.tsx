@@ -2,7 +2,7 @@ import  styles  from "./styles.module.css"
 
 
 type DefaultButtonProps = {
-  children: React.ReactNode;
+  children: React.ReactNode; // é um tipo definido no TypeScript para representar qualquer coisa que possa ser renderizada pelo React.
   color?: 'start' | 'stop';
 } & React.ComponentProps<'button'>
 
