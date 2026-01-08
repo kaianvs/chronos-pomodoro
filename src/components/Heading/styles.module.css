@@ -2,5 +2,6 @@
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: #333;
+  color: --gray-200;
+  text-align: center;
 }
