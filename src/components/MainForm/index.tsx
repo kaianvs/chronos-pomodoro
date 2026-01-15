@@ -2,19 +2,65 @@ import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
 import { Cycles } from '../Cycles';
 import { PlayCircleIcon } from 'lucide-react';
+import { useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import type { TaskModel } from '../../models/TaskModel';
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
 
 
 export function MainForm() {
 
+  const { setState} = useTaskContext();
+  const taskNameInput = useRef<HTMLInputElement>(null)
+
+  function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if(taskNameInput.current === null) return
+
+    const taskName = taskNameInput.current.value.trim();
+
+    if(!taskName){
+      alert("Informe o nome da tarefa")
+      
+      return
+    }
+
+    const newTask: TaskModel = {
+      id: uuidv4(),
+      name: taskName,
+      duration: 1,
+      startDate: Date.now(),
+      completeDate: null,
+      interruptDate: null,
+      type: 'workTime'
+    }
+    const secondsRemaining = newTask.duration * 60;
+
+    setState(prevState =>{
+      return{
+        ...prevState,
+        config:{...prevState.config},
+        activeTask: newTask,
+        currentCycle: 1,
+        secondsRemaining,
+        formattedSecondsRemaining: '00:00',
+        tasks: [...prevState.tasks, newTask]
+      }
+    })
+    
+  }
+  
+ 
 
   return (
-    <form className='form' action=''>
+    <form className='form' onSubmit={handleCreateNewTask} action=''>
       <div className='formRow'>
         <DefaultInput
           id='meuInput'
           type='text'
           labelText='Task'
           placeholder='Digite algo'
+          ref = {taskNameInput}
         />
       </div>
 
