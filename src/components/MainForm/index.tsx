@@ -6,12 +6,20 @@ import { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import type { TaskModel } from '../../models/TaskModel';
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
+import { formatSecondsToMinutes } from '../../utils/formatSecondsToMinutes';
 
 
 export function MainForm() {
 
-  const { setState} = useTaskContext();
+  const { state ,setState} = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null)
+  
+
+  const nextCycle = getNextCycle(state.currentCycle)
+  const nextCycleType = getNextCycleType(nextCycle)
+  console.log(nextCycleType)
 
   function handleCreateNewTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,11 +36,11 @@ export function MainForm() {
     const newTask: TaskModel = {
       id: uuidv4(),
       name: taskName,
-      duration: 1,
+      duration: state.config[nextCycleType],
       startDate: Date.now(),
       completeDate: null,
       interruptDate: null,
-      type: 'workTime'
+      type: nextCycleType
     }
     const secondsRemaining = newTask.duration * 60;
 
@@ -41,9 +49,9 @@ export function MainForm() {
         ...prevState,
         config:{...prevState.config},
         activeTask: newTask,
-        currentCycle: 1,
+        currentCycle: nextCycle,
         secondsRemaining,
-        formattedSecondsRemaining: '00:00',
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
         tasks: [...prevState.tasks, newTask]
       }
     })
@@ -65,7 +73,7 @@ export function MainForm() {
       </div>
 
       <div className='formRow'>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Próximo intervalo é de 25min</p>
       </div>
 
       <div className='formRow'>
