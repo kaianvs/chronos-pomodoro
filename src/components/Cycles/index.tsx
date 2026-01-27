@@ -24,7 +24,12 @@ export function Cycles(){
                   const nextCycle = getNextCycle(index)
                   const nextCycleType = getNextCycleType(nextCycle)
                   return (
-                    <span className={`${styles.cycleDot} ${styles[nextCycleType]}`} aria-label={`Ciclo ${cycleDescriptionMap[nextCycleType]}`} title={`Ciclo ${cycleDescriptionMap[nextCycleType]}`}></span>
+                    <span
+                    key={`${nextCycleType}_${nextCycle}`} 
+                    className={`${styles.cycleDot} 
+                    ${styles[nextCycleType]}`} 
+                    aria-label={`Ciclo ${cycleDescriptionMap[nextCycleType]}`} 
+                    title={`Ciclo ${cycleDescriptionMap[nextCycleType]}`}></span>
                   )
                 })}
                 {/* <span className={`${styles.cycleDot} ${styles.workTime}`}></span> */}
