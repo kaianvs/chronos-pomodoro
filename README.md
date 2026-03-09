@@ -106,10 +106,6 @@ Mencione as ferramentas que você usou para criar seu projeto:
 - **Kaian Vasconcelos** - _Trabalho Inicial_ -
   [kaianvs](https://github.com/kaianvs)
 
-Você também pode ver a lista de todos os
-[colaboradores](https://github.com/kaianvs/chronos-pomodoro/graphs/contributors)
-que participaram deste projeto.
-
 ## 📄 Licença
 
 Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md)
@@ -117,4 +113,4 @@ para detalhes.
 
 ---
 
-⌨️ com ❤️ por [Kaian Vasconcelos](https://github.com/kaianvs) 😊
+⌨️ Desenvolvido com ❤️ por [Kaian Vasconcelos](https://github.com/kaianvs) 😊
